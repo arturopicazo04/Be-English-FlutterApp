@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "868199958716",
+    "project_id": "beenglish-c1cbb",
+    "storage_bucket": "beenglish-c1cbb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:868199958716:android:d316f54a309c8480a6e8b9",
+        "android_client_info": {
+          "package_name": "com.example.be_english"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPXcJQR2lDKQA9EbEaLVCw6Jan8allmw4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:868199958716:android:d2e4d4544d4a1da2a6e8b9",
+        "android_client_info": {
+          "package_name": "com.mycompany.beenglishtest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPXcJQR2lDKQA9EbEaLVCw6Jan8allmw4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
