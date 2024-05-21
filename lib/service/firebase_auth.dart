@@ -99,4 +99,8 @@ class FirebaseAuthService {
       await currentUser.delete();
     }
   }
+
+  Future<void> signOut() async {
+    await _auth.signOut();
+  }
 }

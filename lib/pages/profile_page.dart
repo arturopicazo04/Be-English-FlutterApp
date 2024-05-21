@@ -109,15 +109,13 @@ class ProfilePage extends StatelessWidget {
                     const SizedBox(
                       height: 25,
                     ),
-
                     //username
-//username
                     Text(
                       user?['username'] ?? 'Loading...',
                       style: const TextStyle(
                           fontSize: 24, fontWeight: FontWeight.bold),
                     ),
-//email
+                    //email
                     Text(
                       user?['email'] ?? 'Loading...',
                       style: const TextStyle(
@@ -130,20 +128,35 @@ class ProfilePage extends StatelessWidget {
                     const Expanded(
                       child: SizedBox(),
                     ),
-                    //delete account
-                    CustomButton(
-                      text: "Delete Account?",
-                      onTap: () {
-                        cloudStorageService.deleteProfilePicture();
-                        firestoreService.deleteUserDocument(user!['uid']);
-                        authservice.deleteUser();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const AuthPage(),
+
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        children: [
+                          CustomButton(
+                            text: "Log Out",
+                            onTap: () => authservice.signOut(),
                           ),
-                        );
-                      },
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          //delete account
+                          CustomButton(
+                            text: "Delete Account?",
+                            onTap: () {
+                              cloudStorageService.deleteProfilePicture();
+                              firestoreService.deleteUserDocument(user!['uid']);
+                              authservice.deleteUser();
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const AuthPage(),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

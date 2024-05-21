@@ -38,6 +38,16 @@ class CloudStorageService {
     final fileName =
         'images/users/profile_pictures/${user!.uid}_profile_picture.jpg';
     final fileRef = storage.ref().child(fileName);
-    await fileRef.delete();
+
+    try {
+      // Check if the file exists
+      await fileRef.getDownloadURL();
+
+      // If the file exists, delete it
+      await fileRef.delete();
+    } catch (e) {
+      // If the file does not exist, catch the error
+      print('No file exists at this path');
+    }
   }
 }
