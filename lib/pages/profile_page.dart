@@ -1,6 +1,7 @@
 import 'package:be_english/auth/auth.dart';
 import 'package:be_english/components/custom_backbutton.dart';
 import 'package:be_english/components/custom_button.dart';
+import 'package:be_english/components/custom_drawer.dart';
 import 'package:be_english/components/custom_profile_picture.dart';
 import 'package:be_english/service/cloud_storage_service.dart';
 import 'package:be_english/service/firebase_auth.dart';
@@ -33,6 +34,13 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: AppBar(
+        title: const Text("Profile"),
+        backgroundColor: Colors.transparent,
+        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
+        elevation: 0,
+      ),
+      drawer: CustomDrawer(),
       body: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
           stream: databaseService.getUserDetails(),
           builder: (context, snapshot) {
@@ -55,14 +63,6 @@ class ProfilePage extends StatelessWidget {
               return Center(
                 child: Column(
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.only(left: 25, top: 50),
-                      child: Row(
-                        children: [
-                          CustomBackButtom(),
-                        ],
-                      ),
-                    ),
                     const SizedBox(
                       height: 25,
                     ),
@@ -128,18 +128,10 @@ class ProfilePage extends StatelessWidget {
                     const Expanded(
                       child: SizedBox(),
                     ),
-
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.all(20),
                       child: Column(
                         children: [
-                          CustomButton(
-                            text: "Log Out",
-                            onTap: () => authservice.signOut(),
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
                           //delete account
                           CustomButton(
                             text: "Delete Account?",

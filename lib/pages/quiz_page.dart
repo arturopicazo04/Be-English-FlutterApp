@@ -1,6 +1,8 @@
+import 'package:be_english/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:be_english/components/custom_button.dart';
+import 'package:be_english/service/firestore_service.dart';
 
 class QuizPage extends StatefulWidget {
   final String collectionName;
@@ -14,9 +16,12 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Map<String, dynamic>> _questions = [];
   int _currentQuestionIndex = 0;
-  int _score = 0;
+  int _score = 0; // Puntuation of the quiz
+  int _profileScore = 0; //Puntuation of Profile
   bool _isLoading = true;
   bool _showExample = false;
+  bool? _isCorrect;
+  FirestoreService _firestoreService = FirestoreService();
 
   @override
   void initState() {
@@ -38,41 +43,63 @@ class _QuizPageState extends State<QuizPage> {
 
       setState(() {
         _questions = questions.take(5).toList(); // Take 5 random questions
+        for (var question in _questions) {
+          if (question.containsKey('answers')) {
+            question['answers'].shuffle(); // Randomize the answers
+          }
+        }
         _isLoading = false;
       });
     } catch (e) {
-      // Handle any errors here
+      // Errors
     }
   }
 
-  void _answerQuestion(String selectedAnswer) {
-    if (_questions[_currentQuestionIndex]['verb'] == selectedAnswer ||
-        _questions[_currentQuestionIndex]['word'] == selectedAnswer) {
-      _score++;
-    }
+  void _answerQuestion(String selectedAnswer) async {
+    String correctAnswer = _questions[_currentQuestionIndex]['verb'] ??
+        _questions[_currentQuestionIndex]['word'];
 
     setState(() {
+      _isCorrect = selectedAnswer == correctAnswer;
+      if (_isCorrect!) {
+        _score++;
+        _profileScore += 4;
+      } else {
+        _profileScore--;
+      }
+      _showExample = false;
       _currentQuestionIndex++;
-      _showExample = false; // Reset example visibility for next question
-    });
 
-    if (_currentQuestionIndex >= _questions.length) {
-      _showQuizResult();
-    }
+      if (_currentQuestionIndex >= _questions.length) {
+        if (_score == 5) {
+          _profileScore += 10;
+        }
+        _firestoreService.updateUserProfileScore(_profileScore);
+        _showQuizResult();
+      } else {
+        Future.delayed(Duration(seconds: 2), () {
+          setState(() {
+            _isCorrect = null;
+          });
+        });
+      }
+    });
   }
 
   void _showQuizResult() {
     showDialog(
       context: context,
+      barrierDismissible:
+          false, // Prevent user from dismissing the dialog by tapping outside
       builder: (context) => AlertDialog(
         title: const Text('Quiz Completed'),
-        content: Text('Your score is $_score/${_questions.length}'),
+        content: Text('Your score is $_score/${_questions.length}\n'
+            'You have ${_profileScore >= 0 ? 'gain +' : 'lost -'} ${_profileScore.abs()} points in your profile!'),
         actions: [
           CustomButton(
             text: 'OK',
             onTap: () {
-              Navigator.of(context).pop();
-              Navigator.of(context).pop(); // Go back to home page
+              Navigator.of(context).pushReplacementNamed('/home');
             },
           ),
         ],
@@ -99,8 +126,12 @@ class _QuizPageState extends State<QuizPage> {
     final answersLength = answers != null ? answers.length : 0;
 
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: Text('Quiz (${_currentQuestionIndex + 1}/5)'),
+        title: const Text("Ranking"),
+        backgroundColor: Theme.of(context).colorScheme.background,
+        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
+        elevation: 0,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -111,6 +142,13 @@ class _QuizPageState extends State<QuizPage> {
               currentQuestion['definition'] ?? '',
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
+            const SizedBox(height: 20),
+            if (_isCorrect != null)
+              Icon(
+                _isCorrect! ? Icons.check : Icons.close,
+                color: _isCorrect! ? Colors.green : Colors.red,
+                size: 48,
+              ),
             const SizedBox(height: 20),
             if (_showExample && widget.collectionName != 'vocabulary')
               Padding(
@@ -137,7 +175,7 @@ class _QuizPageState extends State<QuizPage> {
               (index) => Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: CustomButton(
-                  text: answers[index],
+                  text: answers![index],
                   onTap: () => _answerQuestion(answers[index]),
                 ),
               ),

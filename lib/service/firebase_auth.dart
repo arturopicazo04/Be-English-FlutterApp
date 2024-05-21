@@ -48,7 +48,6 @@ class FirebaseAuthService {
         Navigator.pop(context);
         displayMessageToUser(e.code, context);
       } catch (e) {
-        Navigator.pop(context);
         displayMessageToUser(e.toString(), context);
       }
     }
@@ -100,7 +99,7 @@ class FirebaseAuthService {
     }
   }
 
-  Future<void> signOut() async {
-    await _auth.signOut();
+  Future<void> logout() async {
+    FirebaseAuth.instance.signOut();
   }
 }

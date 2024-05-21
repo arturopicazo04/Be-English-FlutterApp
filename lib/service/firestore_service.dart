@@ -18,9 +18,26 @@ class FirestoreService {
     }
   }
 
-  
+  Future<void> updateUserProfileScore(int score) async {
+    try {
+      String userId = FirebaseAuth.instance.currentUser!.uid;
+
+      await FirebaseFirestore.instance.collection('Users').doc(userId).update({
+        'score': FieldValue.increment(score),
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
 
   Future<void> deleteUserDocument(String uid) async {
     await _firestore.collection("Users").doc(uid).delete();
+  }
+
+  Stream<QuerySnapshot> getUsersOrderedByProfileScore() {
+    return _firestore
+        .collection('Users')
+        .orderBy('score', descending: true)
+        .snapshots();
   }
 }

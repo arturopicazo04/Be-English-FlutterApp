@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
         elevation: 0,
       ),
-      drawer: const CustomDrawer(),
+      drawer: CustomDrawer(),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(25.0),

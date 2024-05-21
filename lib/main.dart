@@ -4,6 +4,7 @@ import 'package:be_english/pages/forgot_pass_page.dart';
 import 'package:be_english/pages/home_page.dart';
 import 'package:be_english/pages/phrasal_verbs_quiz_page.dart';
 import 'package:be_english/pages/profile_page.dart';
+import 'package:be_english/pages/ranking_page.dart';
 import 'package:be_english/pages/vocabulary_quiz_page.dart';
 import 'package:be_english/theme/dark_mode.dart';
 import 'package:be_english/theme/light_mode.dart';
@@ -32,6 +33,8 @@ class MainApp extends StatelessWidget {
         '/forgot_password_page': (context) => const FortgotPasswordPage(),
         '/phrasal_verbs_quiz_page': (context) => const PhrasalVerbsQuizPage(),
         '/vocabulary_quiz_page': (context) => const VocabularyQuizPage(),
+        '/ranking_page': (context) => RankingPage(),
+        '/auth_page': (context) => const AuthPage(),
       },
     );
   }
