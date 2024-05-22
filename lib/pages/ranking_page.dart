@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:be_english/components/custom_drawer.dart';
@@ -6,6 +8,8 @@ import 'package:be_english/service/firestore_service.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class RankingPage extends StatefulWidget {
+  const RankingPage({super.key});
+
   @override
   _RankingPageState createState() => _RankingPageState();
 }
@@ -57,7 +61,7 @@ class _RankingPageState extends State<RankingPage> {
       ),
       drawer: CustomDrawer(),
       body: _isLoading
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(),
             )
           : ListView.builder(

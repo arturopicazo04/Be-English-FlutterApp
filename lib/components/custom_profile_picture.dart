@@ -20,7 +20,7 @@ class ProfilePictureWidget extends StatelessWidget {
               width: size,
               height: size,
               fit: BoxFit.cover,
-              placeholder: (context, url) => CircularProgressIndicator(),
+              placeholder: (context, url) => const CircularProgressIndicator(),
               errorWidget: (context, url, error) => Icon(Icons.error,
                   size: size,
                   color: Theme.of(context).colorScheme.inversePrimary),

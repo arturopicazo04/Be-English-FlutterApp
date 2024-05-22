@@ -14,8 +14,7 @@ class FirestoreService {
         'email': userCredential.user!.email,
         'username': username,
         'profilePictureUrl': '',
-        'stat_correctAnswers': 0,
-        'stat_incorrectAnswers': 0,
+        'score': 0,
       });
     }
   }
@@ -36,13 +35,6 @@ class FirestoreService {
     await _firestore.collection("Users").doc(uid).delete();
   }
 
-  Stream<QuerySnapshot> getUsersOrderedByProfileScore() {
-    return _firestore
-        .collection('Users')
-        .orderBy('score', descending: true)
-        .snapshots();
-  }
-
   Future<Map<String, dynamic>> getUserData(String userId) async {
     try {
       DocumentSnapshot<Map<String, dynamic>> snapshot =
@@ -60,13 +52,20 @@ class FirestoreService {
 
   Future<List<Map<String, dynamic>>> getAllUsersData() async {
     try {
-      final QuerySnapshot querySnapshot =
-          await FirebaseFirestore.instance.collection('Users').get();
-      return querySnapshot.docs
+      final QuerySnapshot snapshot = await FirebaseFirestore.instance
+          .collection('Users')
+          .where('score',
+              isGreaterThanOrEqualTo:
+                  0) // Filtra usuarios con puntuación mayor que 0
+          .orderBy('score', descending: true)
+          .get();
+
+      return snapshot.docs
           .map((doc) => doc.data() as Map<String, dynamic>)
           .toList();
     } catch (e) {
-      throw 'Error getting user data: $e';
+      print('Error getting all users data: $e');
+      throw Exception('Error getting all users data');
     }
   }
 }

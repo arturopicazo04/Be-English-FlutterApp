@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class FullScreenLoader extends StatelessWidget {
-  const FullScreenLoader({Key? key}) : super(key: key);
+  const FullScreenLoader({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: Colors.transparent,
       body: Center(
         child: CircularProgressIndicator(),
