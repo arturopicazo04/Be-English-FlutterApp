@@ -38,7 +38,7 @@ class HomePage extends StatelessWidget {
                   startQuiz(context, 'verbs');
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               CustomButton(
                 text: "Vocabulary Quiz",
                 onTap: () {
