@@ -18,7 +18,6 @@ class QuizService {
     // Shuffle the list to randomize it
     allQuestions.shuffle();
 
-    // Return the first 5 elements (or less if there are not enough documents)
     return allQuestions.take(5).toList();
   }
 }
