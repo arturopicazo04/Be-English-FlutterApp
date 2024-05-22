@@ -1,5 +1,7 @@
+import 'package:be_english/helper/helper_function.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 class FirestoreService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -39,5 +41,32 @@ class FirestoreService {
         .collection('Users')
         .orderBy('score', descending: true)
         .snapshots();
+  }
+
+  Future<Map<String, dynamic>> getUserData(String userId) async {
+    try {
+      DocumentSnapshot<Map<String, dynamic>> snapshot =
+          await _firestore.collection('Users').doc(userId).get();
+      if (snapshot.exists) {
+        return snapshot.data()!;
+      } else {
+        return {};
+      }
+    } catch (error) {
+      displayMessageToUser("Error getting User Data", "" as BuildContext);
+      return {};
+    }
+  }
+
+  Future<List<Map<String, dynamic>>> getAllUsersData() async {
+    try {
+      final QuerySnapshot querySnapshot =
+          await FirebaseFirestore.instance.collection('Users').get();
+      return querySnapshot.docs
+          .map((doc) => doc.data() as Map<String, dynamic>)
+          .toList();
+    } catch (e) {
+      throw 'Error getting user data: $e';
+    }
   }
 }

@@ -105,17 +105,21 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 //password textfield
                 CustomTextField(
-                    hintText: "Password",
-                    obscureText: true,
-                    controller: passwordcontroller),
+                  hintText: "Password",
+                  obscureText: true,
+                  controller: passwordcontroller,
+                  showToggleIcon: true,
+                ),
                 const SizedBox(
                   height: 10,
                 ),
                 //Confirmpassword textfield
                 CustomTextField(
-                    hintText: "Confirm Password",
-                    obscureText: true,
-                    controller: confirmpasswordcontroller),
+                  hintText: "Confirm Password",
+                  obscureText: true,
+                  controller: confirmpasswordcontroller,
+                  showToggleIcon: true,
+                ),
                 const SizedBox(
                   height: 25,
                 ),

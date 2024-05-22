@@ -80,9 +80,11 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 //password textfield
                 CustomTextField(
-                    hintText: "Password",
-                    obscureText: true,
-                    controller: passwordcontroller),
+                  hintText: "Password",
+                  obscureText: true,
+                  controller: passwordcontroller,
+                  showToggleIcon: true,
+                ),
                 const SizedBox(
                   height: 10,
                 ),

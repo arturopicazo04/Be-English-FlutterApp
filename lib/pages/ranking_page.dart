@@ -3,11 +3,47 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:be_english/components/custom_drawer.dart';
 import 'package:be_english/components/custom_profile_picture.dart';
 import 'package:be_english/service/firestore_service.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
-class RankingPage extends StatelessWidget {
+class RankingPage extends StatefulWidget {
+  @override
+  _RankingPageState createState() => _RankingPageState();
+}
+
+class _RankingPageState extends State<RankingPage> {
   final FirestoreService _firestoreService = FirestoreService();
+  List<Map<String, dynamic>> _users = [];
+  bool _isLoading = true;
 
-  RankingPage({Key? key}) : super(key: key);
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
+    try {
+      final users = await _firestoreService.getAllUsersData();
+      setState(() {
+        _users = users;
+        _isLoading = false;
+      });
+
+      // Preload images
+      for (var user in users) {
+        if (user['profilePictureUrl'] != null &&
+            user['profilePictureUrl'] != '') {
+          precacheImage(
+              CachedNetworkImageProvider(user['profilePictureUrl']), context);
+        }
+      }
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
+      print('Error loading user data: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,27 +56,14 @@ class RankingPage extends StatelessWidget {
         elevation: 0,
       ),
       drawer: CustomDrawer(),
-      body: StreamBuilder<QuerySnapshot>(
-        stream: _firestoreService.getUsersOrderedByProfileScore(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
+      body: _isLoading
+          ? Center(
               child: CircularProgressIndicator(),
-            );
-          } else if (snapshot.hasError) {
-            return Center(
-              child: Text('Error: ${snapshot.error}'),
-            );
-          } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return const Center(
-              child: Text('No users found.'),
-            );
-          } else {
-            final users = snapshot.data!.docs;
-            return ListView.builder(
-              itemCount: users.length,
+            )
+          : ListView.builder(
+              itemCount: _users.length,
               itemBuilder: (context, index) {
-                final userData = users[index].data() as Map<String, dynamic>;
+                final userData = _users[index];
                 final profileScore = userData['score'];
                 final username = userData['username'];
 
@@ -53,10 +76,7 @@ class RankingPage extends StatelessWidget {
                   subtitle: Text('Profile Score: $profileScore'),
                 );
               },
-            );
-          }
-        },
-      ),
+            ),
     );
   }
 }

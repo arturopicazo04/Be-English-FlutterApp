@@ -124,7 +124,7 @@ class ProfilePage extends StatelessWidget {
                       ),
                     ),
                     //TODO: STATS
-
+                    
                     const Expanded(
                       child: SizedBox(),
                     ),
@@ -139,7 +139,7 @@ class ProfilePage extends StatelessWidget {
                               cloudStorageService.deleteProfilePicture();
                               firestoreService.deleteUserDocument(user!['uid']);
                               authservice.deleteUser();
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => const AuthPage(),

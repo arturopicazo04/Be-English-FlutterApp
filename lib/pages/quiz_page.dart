@@ -1,4 +1,3 @@
-import 'package:be_english/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:be_english/components/custom_button.dart';
@@ -16,12 +15,13 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Map<String, dynamic>> _questions = [];
   int _currentQuestionIndex = 0;
-  int _score = 0; // Puntuation of the quiz
-  int _profileScore = 0; //Puntuation of Profile
+  int _score = 0;
+  int _profileScore = 0;
   bool _isLoading = true;
   bool _showExample = false;
   bool? _isCorrect;
-  FirestoreService _firestoreService = FirestoreService();
+  String? _selectedAnswer;
+  final FirestoreService _firestoreService = FirestoreService();
 
   @override
   void initState() {
@@ -34,32 +34,29 @@ class _QuizPageState extends State<QuizPage> {
       QuerySnapshot snapshot = await FirebaseFirestore.instance
           .collection(widget.collectionName)
           .get();
-
-      List<Map<String, dynamic>> questions = snapshot.docs.map((doc) {
-        return doc.data() as Map<String, dynamic>;
-      }).toList();
-
-      questions.shuffle(); // Randomize the questions
-
+      List<Map<String, dynamic>> questions = snapshot.docs
+          .map((doc) => doc.data() as Map<String, dynamic>)
+          .toList();
+      questions.shuffle();
       setState(() {
-        _questions = questions.take(5).toList(); // Take 5 random questions
+        _questions = questions.take(5).toList();
         for (var question in _questions) {
           if (question.containsKey('answers')) {
-            question['answers'].shuffle(); // Randomize the answers
+            question['answers'].shuffle();
           }
         }
         _isLoading = false;
       });
     } catch (e) {
-      // Errors
+      // Handle error
     }
   }
 
   void _answerQuestion(String selectedAnswer) async {
     String correctAnswer = _questions[_currentQuestionIndex]['verb'] ??
         _questions[_currentQuestionIndex]['word'];
-
     setState(() {
+      _selectedAnswer = selectedAnswer;
       _isCorrect = selectedAnswer == correctAnswer;
       if (_isCorrect!) {
         _score++;
@@ -67,21 +64,20 @@ class _QuizPageState extends State<QuizPage> {
       } else {
         _profileScore--;
       }
+    });
+
+    await Future.delayed(const Duration(seconds: 1));
+    setState(() {
+      _isCorrect = null;
+      _selectedAnswer = null;
       _showExample = false;
       _currentQuestionIndex++;
-
       if (_currentQuestionIndex >= _questions.length) {
         if (_score == 5) {
           _profileScore += 10;
         }
         _firestoreService.updateUserProfileScore(_profileScore);
         _showQuizResult();
-      } else {
-        Future.delayed(Duration(seconds: 2), () {
-          setState(() {
-            _isCorrect = null;
-          });
-        });
       }
     });
   }
@@ -89,12 +85,11 @@ class _QuizPageState extends State<QuizPage> {
   void _showQuizResult() {
     showDialog(
       context: context,
-      barrierDismissible:
-          false, // Prevent user from dismissing the dialog by tapping outside
+      barrierDismissible: false,
       builder: (context) => AlertDialog(
         title: const Text('Quiz Completed'),
         content: Text('Your score is $_score/${_questions.length}\n'
-            'You have ${_profileScore >= 0 ? 'gain +' : 'lost -'} ${_profileScore.abs()} points in your profile!'),
+            'You have ${_profileScore >= 0 ? 'gained +' : 'lost -'} ${_profileScore.abs()} points in your profile!'),
         actions: [
           CustomButton(
             text: 'OK',
@@ -143,13 +138,6 @@ class _QuizPageState extends State<QuizPage> {
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
-            if (_isCorrect != null)
-              Icon(
-                _isCorrect! ? Icons.check : Icons.close,
-                color: _isCorrect! ? Colors.green : Colors.red,
-                size: 48,
-              ),
-            const SizedBox(height: 20),
             if (_showExample && widget.collectionName != 'vocabulary')
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -172,13 +160,35 @@ class _QuizPageState extends State<QuizPage> {
             ],
             ...List.generate(
               answersLength,
-              (index) => Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: CustomButton(
-                  text: answers![index],
-                  onTap: () => _answerQuestion(answers[index]),
-                ),
-              ),
+              (index) {
+                final answer = answers![index];
+                return Stack(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: CustomButton(
+                        text: answer,
+                        onTap: _selectedAnswer == null
+                            ? () => _answerQuestion(answer)
+                            : () {},
+                      ),
+                    ),
+                    if (_selectedAnswer == answer)
+                      Positioned(
+                        right: 10,
+                        top: 0,
+                        bottom: 0,
+                        child: Icon(
+                          _isCorrect! ? Icons.check : Icons.close,
+                          color: _isCorrect!
+                              ? Colors.green
+                              : Color.fromARGB(244, 80, 10, 10),
+                          size: 48,
+                        ),
+                      ),
+                  ],
+                );
+              },
             ),
           ],
         ),
