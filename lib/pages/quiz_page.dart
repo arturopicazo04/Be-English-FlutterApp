@@ -6,12 +6,11 @@ import 'package:be_english/service/firestore_service.dart';
 class QuizPage extends StatefulWidget {
   final String collectionName;
 
-  const QuizPage({Key? key, required this.collectionName}) : super(key: key);
+  const QuizPage({super.key, required this.collectionName});
 
   @override
   _QuizPageState createState() => _QuizPageState();
 }
-//TODO: MOSTRAR SOLUCION
 
 class _QuizPageState extends State<QuizPage> {
   List<Map<String, dynamic>> _questions = [];
@@ -49,7 +48,10 @@ class _QuizPageState extends State<QuizPage> {
         _isLoading = false;
       });
     } catch (e) {
-      // Handle error
+      print(e);
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -201,7 +203,7 @@ class _QuizPageState extends State<QuizPage> {
                           _isCorrect! ? Icons.check : Icons.close,
                           color: _isCorrect!
                               ? Colors.green
-                              : Color.fromARGB(244, 80, 10, 10),
+                              : const Color.fromARGB(244, 80, 10, 10),
                           size: 48,
                         ),
                       ),
@@ -210,7 +212,7 @@ class _QuizPageState extends State<QuizPage> {
               },
             ),
             const SizedBox(height: 20),
-            _buildSolution(), // Mostrar la solución si la respuesta es incorrecta
+            _buildSolution(),
           ],
         ),
       ),

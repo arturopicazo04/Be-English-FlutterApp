@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 
 class CustomTextField extends StatefulWidget {
   const CustomTextField({
-    Key? key,
+    super.key,
     required this.hintText,
     required this.obscureText,
     required this.controller,
     this.showToggleIcon =
-        false, // Parámetro opcional para mostrar el icono de alternar visibilidad
-  }) : super(key: key);
+        false,
+  });
 
   final String hintText;
   final bool obscureText;
   final TextEditingController controller;
-  final bool showToggleIcon; // Nuevo parámetro
+  final bool showToggleIcon;
 
   @override
   _CustomTextFieldState createState() => _CustomTextFieldState();

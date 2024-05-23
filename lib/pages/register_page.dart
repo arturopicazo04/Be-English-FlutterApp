@@ -66,7 +66,7 @@ class _RegisterPageState extends State<RegisterPage> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(
-                      top: 50.0), // Adjust the value as needed
+                      top: 50.0),
                   child: Icon(
                     Icons.person,
                     size: 80,

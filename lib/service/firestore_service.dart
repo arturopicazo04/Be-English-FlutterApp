@@ -84,7 +84,7 @@ class FirestoreService {
           .collection('Users')
           .where('score',
               isGreaterThanOrEqualTo:
-                  0) // Filtra usuarios con puntuación mayor que 0
+                  0) 
           .orderBy('score', descending: true)
           .get();
 
