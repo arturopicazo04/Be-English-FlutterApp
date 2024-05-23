@@ -8,13 +8,14 @@ class FirestoreService {
 
   Future<void> createUserDocument(
       UserCredential userCredential, String username) async {
-    if (userCredential != null && userCredential.user != null) {
+    if (userCredential.user != null) {
       await _firestore.collection("Users").doc(userCredential.user!.uid).set({
         'uid': userCredential.user!.uid,
         'email': userCredential.user!.email,
         'username': username,
         'profilePictureUrl': '',
         'score': 0,
+        'lastTestDate': '',
       });
     }
   }
@@ -22,13 +23,40 @@ class FirestoreService {
   Future<void> updateUserProfileScore(int score) async {
     try {
       String userId = FirebaseAuth.instance.currentUser!.uid;
-
+      DateTime currentDate = DateTime.now();
+      // Add bonus points if the user has not taken the test today
       await FirebaseFirestore.instance.collection('Users').doc(userId).update({
         'score': FieldValue.increment(score),
+        'lastTestDate': currentDate,
       });
     } catch (e) {
       print(e);
     }
+  }
+
+  Future<int> calculateBonusPoints() async {
+    try {
+      String userId = FirebaseAuth.instance.currentUser!.uid;
+
+      DocumentSnapshot userDoc = await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(userId)
+          .get();
+      Timestamp? lastTestTimestamp = userDoc['lastTestDate'] as Timestamp?;
+      if (lastTestTimestamp != null) {
+        DateTime lastTestDate = lastTestTimestamp.toDate();
+        DateTime currentDate = DateTime.now();
+
+        if (lastTestDate.year != currentDate.year ||
+            lastTestDate.month != currentDate.month ||
+            lastTestDate.day != currentDate.day) {
+          return 50;
+        }
+      }
+    } catch (e) {
+      print('Error al calcular el bono de puntos: $e');
+    }
+    return 0;
   }
 
   Future<void> deleteUserDocument(String uid) async {

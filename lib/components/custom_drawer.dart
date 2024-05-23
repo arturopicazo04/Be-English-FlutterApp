@@ -46,7 +46,7 @@ class CustomDrawer extends StatelessWidget {
                     ),
                     title: const Text("P R O F I L E"),
                     onTap: () {
-                      Navigator.pushReplacementNamed(context, '/profile_page');
+                      Navigator.pushNamed(context, '/profile_page');
                     },
                   ),
                 ),
@@ -60,7 +60,7 @@ class CustomDrawer extends StatelessWidget {
                     ),
                     title: const Text("R A N K I N G"),
                     onTap: () {
-                      Navigator.pushReplacementNamed(context, '/ranking_page');
+                      Navigator.pushNamed(context, '/ranking_page');
                     },
                   ),
                 ),

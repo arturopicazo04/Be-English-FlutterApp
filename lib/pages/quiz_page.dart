@@ -11,6 +11,7 @@ class QuizPage extends StatefulWidget {
   @override
   _QuizPageState createState() => _QuizPageState();
 }
+//TODO: MOSTRAR SOLUCION
 
 class _QuizPageState extends State<QuizPage> {
   List<Map<String, dynamic>> _questions = [];
@@ -52,7 +53,7 @@ class _QuizPageState extends State<QuizPage> {
     }
   }
 
-  void _answerQuestion(String selectedAnswer) async {
+  void _answerQuestion(String selectedAnswer) {
     String correctAnswer = _questions[_currentQuestionIndex]['verb'] ??
         _questions[_currentQuestionIndex]['word'];
     setState(() {
@@ -66,19 +67,23 @@ class _QuizPageState extends State<QuizPage> {
       }
     });
 
-    await Future.delayed(const Duration(seconds: 1));
-    setState(() {
-      _isCorrect = null;
-      _selectedAnswer = null;
-      _showExample = false;
-      _currentQuestionIndex++;
-      if (_currentQuestionIndex >= _questions.length) {
-        if (_score == 5) {
-          _profileScore += 10;
+    Future.delayed(const Duration(seconds: 1), () {
+      setState(() {
+        _isCorrect = null;
+        _selectedAnswer = null;
+        _showExample = false;
+        _currentQuestionIndex++;
+        if (_currentQuestionIndex >= _questions.length) {
+          if (_score == 5) {
+            _profileScore += 10;
+          }
+          _firestoreService.calculateBonusPoints().then((bonusPoints) {
+            _profileScore += bonusPoints;
+            _firestoreService.updateUserProfileScore(_profileScore);
+            _showQuizResult();
+          });
         }
-        _firestoreService.updateUserProfileScore(_profileScore);
-        _showQuizResult();
-      }
+      });
     });
   }
 
@@ -89,7 +94,7 @@ class _QuizPageState extends State<QuizPage> {
       builder: (context) => AlertDialog(
         title: const Text('Quiz Completed'),
         content: Text('Your score is $_score/${_questions.length}\n'
-            'You have ${_profileScore >= 0 ? 'gained +' : 'lost -'} ${_profileScore.abs()} points in your profile!'),
+            'You have ${_profileScore >= 0 ? 'gained +' : 'lost -'}${_profileScore.abs()} points in your profile!'),
         actions: [
           CustomButton(
             text: 'OK',
@@ -102,6 +107,22 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 
+  Widget _buildSolution() {
+    if (_isCorrect != null && !_isCorrect!) {
+      final correctAnswer = _questions[_currentQuestionIndex]['verb'] ??
+          _questions[_currentQuestionIndex]['word'];
+      return Center(
+        child: Text(
+          'Correct answer: $correctAnswer',
+          style: const TextStyle(
+              color: Colors.red, fontWeight: FontWeight.bold, fontSize: 22),
+        ),
+      );
+    } else {
+      return const SizedBox.shrink();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     if (_isLoading) {
@@ -111,9 +132,7 @@ class _QuizPageState extends State<QuizPage> {
     }
 
     if (_currentQuestionIndex >= _questions.length) {
-      return const Scaffold(
-        body: Center(child: Text('Quiz Completed')),
-      );
+      return const Scaffold();
     }
 
     final currentQuestion = _questions[_currentQuestionIndex];
@@ -123,7 +142,7 @@ class _QuizPageState extends State<QuizPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: const Text("Ranking"),
+        title: const Text("Quiz"),
         backgroundColor: Theme.of(context).colorScheme.background,
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
         elevation: 0,
@@ -190,6 +209,8 @@ class _QuizPageState extends State<QuizPage> {
                 );
               },
             ),
+            const SizedBox(height: 20),
+            _buildSolution(), // Mostrar la solución si la respuesta es incorrecta
           ],
         ),
       ),

@@ -31,7 +31,7 @@ class NotificationService {
           body: 'Time to take your daily quiz!',
         ),
         schedule: NotificationCalendar(
-          hour: 16,
+          hour: 9,
           minute: 0,
           second: 0,
           timeZone: 'CET',
