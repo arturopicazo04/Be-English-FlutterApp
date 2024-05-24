@@ -45,6 +45,13 @@ class HomePage extends StatelessWidget {
                   startQuiz(context, 'vocabulary');
                 },
               ),
+              const SizedBox(height: 20),
+              CustomButton(
+                text: "Exams Guide",
+                onTap: () {
+                  Navigator.pushNamed(context, '/guide_page');
+                },
+              ),
             ],
           ),
         ),

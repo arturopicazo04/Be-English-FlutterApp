@@ -4,11 +4,8 @@ import 'package:be_english/components/custom_textfield.dart';
 import 'package:be_english/helper/helper_function.dart';
 import 'package:be_english/service/firebase_auth.dart';
 import 'package:be_english/service/firestore_service.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key, required this.onTap});
@@ -65,8 +62,7 @@ class _RegisterPageState extends State<RegisterPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(
-                      top: 50.0),
+                  padding: const EdgeInsets.only(top: 50.0),
                   child: Icon(
                     Icons.person,
                     size: 80,
