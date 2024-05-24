@@ -47,9 +47,16 @@ class HomePage extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               CustomButton(
-                text: "Exams Guide",
+                text: "C1 Exams Guide",
                 onTap: () {
                   Navigator.pushNamed(context, '/guide_page');
+                },
+              ),
+              const SizedBox(height: 20),
+              CustomButton(
+                text: "C1 Interactive Exams",
+                onTap: () {
+                  Navigator.pushNamed(context, '/interactive_exams_page');
                 },
               ),
             ],

@@ -19,7 +19,6 @@ class _FortgotPasswordPageState extends State<FortgotPasswordPage> {
   void resetPassword() async {
     // Get screen size
     double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
 
     //show loading circle
     showDialog(
