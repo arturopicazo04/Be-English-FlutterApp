@@ -27,6 +27,7 @@ class GuidePage extends StatelessWidget {
           backgroundColor: Theme.of(context).colorScheme.background,
           childrenPadding: const EdgeInsets.symmetric(horizontal: 8.0),
           tilePadding: const EdgeInsets.symmetric(horizontal: 16.0),
+          maintainState: false,
           children: [
             ListTile(
               title: Column(

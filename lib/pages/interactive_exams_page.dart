@@ -42,12 +42,16 @@ class InteractiveExamsPage extends StatelessWidget {
                         const SizedBox(height: 10),
                         CustomButton(
                           text: "Word Formation",
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.pushNamed(context, '/uoe_word_formation');
+                          },
                         ),
                         const SizedBox(height: 10),
                         CustomButton(
                           text: "Key Word Transformation",
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.pushNamed(context, '/uoe_key_word_transformation');
+                          },
                         ),
                       ],
                     ),
