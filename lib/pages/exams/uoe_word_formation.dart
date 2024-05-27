@@ -1,12 +1,13 @@
-import 'package:flutter/material.dart';
+import 'package:be_english/components/custom_answer_field.dart';
 import 'package:be_english/components/custom_button.dart';
 import 'package:be_english/data/exam_data.dart';
+import 'package:be_english/helper/helper_function.dart';
+import 'package:flutter/material.dart';
 
 class WordFormationExamPage extends StatefulWidget {
   const WordFormationExamPage({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _WordFormationExamPageState createState() => _WordFormationExamPageState();
 }
 
@@ -61,49 +62,11 @@ class _WordFormationExamPageState extends State<WordFormationExamPage> {
             TextButton(
               child: const Text("Show Correct Answers"),
               onPressed: () {
-                showCorrectAnswers();
-              },
-            ),
-            TextButton(
-              child: const Text("Close"),
-              onPressed: () {
                 Navigator.of(context).pop();
+                showCorrectAnswersDialog(
+                    context, ExamData.correctAnswersWordFormation);
               },
             ),
-          ],
-        );
-      },
-    );
-  }
-
-  void showCorrectAnswers() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text("Correct Answers"),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              for (int i = 0;
-                  i < ExamData.correctAnswersWordFormation.length;
-                  i++)
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Text(
-                          'Answer ${i + 1}: ${ExamData.correctAnswersWordFormation[i]}',
-                          style: const TextStyle(color: Colors.yellow),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-            ],
-          ),
-          actions: <Widget>[
             TextButton(
               child: const Text("Close"),
               onPressed: () {
@@ -142,36 +105,21 @@ class _WordFormationExamPageState extends State<WordFormationExamPage> {
             ),
             const SizedBox(height: 16),
             for (int i = 0; i < 8; i++)
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: TextField(
-                  controller: controllers[i],
-                  onChanged: (value) {
-                    setState(() {
-                      userAnswers[i] = value.toUpperCase();
-                    });
-                  },
-                  decoration: InputDecoration(
-                    labelText: "Answer ${i + 1}",
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: isAnswerCorrect[i]
-                            ? Colors.green
-                            : Theme.of(context).colorScheme.inversePrimary,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: isAnswerCorrect[i]
-                            ? Colors.green
-                            : Theme.of(context).colorScheme.inversePrimary,
-                      ),
-                    ),
-                  ),
-                ),
+              CustomAnswerField(
+                controller: controllers[i],
+                index: i,
+                isCorrect: isAnswerCorrect[i],
+                onChanged: (value) {
+                  setState(() {
+                    userAnswers[i] = value.toUpperCase();
+                  });
+                },
               ),
             const SizedBox(height: 20),
-            CustomButton(text: "Check Answers", onTap: checkAnswers),
+            CustomButton(
+              onTap: checkAnswers,
+              text: 'Check Answers',
+            ),
           ],
         ),
       ),

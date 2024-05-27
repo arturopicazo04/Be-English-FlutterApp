@@ -40,13 +40,9 @@ class CloudStorageService {
     final fileRef = storage.ref().child(fileName);
 
     try {
-      // Check if the file exists
       await fileRef.getDownloadURL();
-
-      // If the file exists, delete it
       await fileRef.delete();
     } catch (e) {
-      // If the file does not exist, catch the error
       print('No file exists at this path');
     }
   }
