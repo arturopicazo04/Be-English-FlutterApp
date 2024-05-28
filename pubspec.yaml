@@ -19,6 +19,7 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   cached_network_image: ^3.3.1
   awesome_notifications: ^0.9.3+1
+  just_audio: ^0.9.38
 
 
 dev_dependencies:
@@ -31,6 +32,9 @@ flutter:
   assets:
     - assets/icon/icon.png
     - assets/icon/notification_icon.png
+    - assets/audio/extract1.mp3
+    - assets/audio/extract2.mp3
+    - assets/audio/extract3.mp3
 
 flutter_icons:
   android: true

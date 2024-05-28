@@ -1,8 +1,13 @@
 import 'package:be_english/auth/auth.dart';
 import 'package:be_english/firebase_options.dart';
-import 'package:be_english/pages/exams/uoe_key_word_transformation.dart';
-import 'package:be_english/pages/exams/uoe_open_cloze.dart';
-import 'package:be_english/pages/exams/uoe_word_formation.dart';
+import 'package:be_english/pages/exams/listening_part1_page.dart';
+import 'package:be_english/pages/exams/reading_part1_multiple_choice_cloze.dart';
+import 'package:be_english/pages/exams/reading_part5_multiple_choice.dart';
+import 'package:be_english/pages/exams/reading_part6_open_cloze.dart';
+import 'package:be_english/pages/exams/reading_part7_multiple_matching.dart';
+import 'package:be_english/pages/exams/uoe_part4_key_word_transformation.dart';
+import 'package:be_english/pages/exams/uoe_part2_open_cloze.dart';
+import 'package:be_english/pages/exams/uoe_part3_word_formation.dart';
 import 'package:be_english/pages/forgot_pass_page.dart';
 import 'package:be_english/pages/guides_page.dart';
 import 'package:be_english/pages/home_page.dart';
@@ -42,9 +47,16 @@ class MainApp extends StatelessWidget {
         '/auth_page': (context) => const AuthPage(),
         '/guide_page': (context) => const GuidePage(),
         '/interactive_exams_page': (context) => const InteractiveExamsPage(),
-        '/uoe_open_cloze': (context) => const OpenClozeExamPage(),
-        '/uoe_word_formation': (context) => const WordFormationExamPage(),
-        '/uoe_key_word_transformation': (context) => const KeyWordTransformationExamPage(),
+        '/uoe_part2_open_cloze': (context) => const OpenClozeExamPage(),
+        '/uoe_part3_word_formation': (context) => const WordFormationExamPage(),
+        '/uoe_part4_key_word_transformation': (context) =>
+            const KeyWordTransformationExamPage(),
+        '/reading_part1_multiple_choice_cloze': (context) =>
+            const ReadingPart1Page(),
+        '/reading_part5_multiple_choice': (context) => const ReadingPart5Page(),
+        '/reading_part6_open_cloze': (context) => const ReadingPart6Page(),
+        '/reading_part7_multiple_choice': (context) => const ReadingPart7Page(),
+        '/listening_part1' : (context) => const ListeningPart1Page(),
       },
     );
   }

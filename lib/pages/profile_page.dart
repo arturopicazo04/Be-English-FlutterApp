@@ -1,5 +1,4 @@
 import 'package:be_english/auth/auth.dart';
-import 'package:be_english/components/custom_backbutton.dart';
 import 'package:be_english/components/custom_button.dart';
 import 'package:be_english/components/custom_drawer.dart';
 import 'package:be_english/components/custom_profile_picture.dart';
@@ -8,9 +7,7 @@ import 'package:be_english/service/firebase_auth.dart';
 import 'package:be_english/service/firestore_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class DatabaseService {
   final User? currentUser = FirebaseAuth.instance.currentUser;
@@ -123,7 +120,6 @@ class ProfilePage extends StatelessWidget {
                         fontWeight: FontWeight.normal,
                       ),
                     ),
-                    //TODO: STATS
                     
                     const Expanded(
                       child: SizedBox(),

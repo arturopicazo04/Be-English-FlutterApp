@@ -4,27 +4,29 @@ import 'package:be_english/data/exam_data.dart';
 import 'package:be_english/helper/helper_function.dart';
 import 'package:flutter/material.dart';
 
-class OpenClozeExamPage extends StatefulWidget {
-  const OpenClozeExamPage({super.key});
+class WordFormationExamPage extends StatefulWidget {
+  const WordFormationExamPage({super.key});
 
   @override
-  _OpenClozeExamPageState createState() => _OpenClozeExamPageState();
+  _WordFormationExamPageState createState() => _WordFormationExamPageState();
 }
 
-class _OpenClozeExamPageState extends State<OpenClozeExamPage> {
+class _WordFormationExamPageState extends State<WordFormationExamPage> {
   List<String> userAnswers = List.filled(8, "");
-  List<bool> isAnswerCorrect = List.filled(8, false);
   List<TextEditingController> controllers =
       List.generate(8, (_) => TextEditingController());
+  List<bool> isAnswerCorrect = List.filled(8, false);
 
   void checkAnswers() {
-    for (int i = 0; i < ExamData.correctAnswersOpenCloze.length; i++) {
-      if (userAnswers[i].toUpperCase() == ExamData.correctAnswersOpenCloze[i]) {
+    for (int i = 0; i < ExamData.correctAnswersWordFormation.length; i++) {
+      if (userAnswers[i].toUpperCase() ==
+          ExamData.correctAnswersWordFormation[i]) {
         isAnswerCorrect[i] = true;
       } else {
         isAnswerCorrect[i] = false;
       }
     }
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -34,7 +36,9 @@ class _OpenClozeExamPageState extends State<OpenClozeExamPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              for (int i = 0; i < ExamData.correctAnswersOpenCloze.length; i++)
+              for (int i = 0;
+                  i < ExamData.correctAnswersWordFormation.length;
+                  i++)
                 Row(
                   children: <Widget>[
                     Icon(
@@ -60,7 +64,7 @@ class _OpenClozeExamPageState extends State<OpenClozeExamPage> {
               onPressed: () {
                 Navigator.of(context).pop();
                 showCorrectAnswersDialog(
-                    context, ExamData.correctAnswersOpenCloze);
+                    context, ExamData.correctAnswersWordFormation);
               },
             ),
             TextButton(
@@ -80,7 +84,7 @@ class _OpenClozeExamPageState extends State<OpenClozeExamPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: const Text("Open Cloze Exam"),
+        title: const Text("Word Formation Exercise"),
         backgroundColor: Colors.transparent,
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
         elevation: 0,
@@ -91,16 +95,16 @@ class _OpenClozeExamPageState extends State<OpenClozeExamPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             const Text(
-              ExamData.questionOpenCloze,
+              ExamData.questionWordFormation,
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
             const Text(
-              ExamData.questionTextOpenCloze,
+              ExamData.questionTextWordFormation,
               style: TextStyle(fontSize: 16.0),
             ),
             const SizedBox(height: 16),
-            for (int i = 0; i < ExamData.correctAnswersOpenCloze.length; i++)
+            for (int i = 0; i < 8; i++)
               CustomAnswerField(
                 controller: controllers[i],
                 index: i,
@@ -112,9 +116,9 @@ class _OpenClozeExamPageState extends State<OpenClozeExamPage> {
                 },
               ),
             const SizedBox(height: 20),
-            CustomButton(
-              onTap: checkAnswers,
-              text: 'Check Answers',
+            ElevatedButton(
+              onPressed: checkAnswers,
+              child: const Text("Check Answers"),
             ),
           ],
         ),

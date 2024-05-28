@@ -1,26 +1,24 @@
-import 'package:be_english/components/custom_answer_field.dart';
-import 'package:be_english/components/custom_button.dart';
+import 'package:be_english/components/custom_multiple_choice.dart';
 import 'package:be_english/data/exam_data.dart';
 import 'package:be_english/helper/helper_function.dart';
 import 'package:flutter/material.dart';
 
-class WordFormationExamPage extends StatefulWidget {
-  const WordFormationExamPage({super.key});
+class ReadingPart1Page extends StatefulWidget {
+  const ReadingPart1Page({super.key});
 
   @override
-  _WordFormationExamPageState createState() => _WordFormationExamPageState();
+  // ignore: library_private_types_in_public_api
+  _ReadingPart1PageState createState() => _ReadingPart1PageState();
 }
 
-class _WordFormationExamPageState extends State<WordFormationExamPage> {
+class _ReadingPart1PageState extends State<ReadingPart1Page> {
   List<String> userAnswers = List.filled(8, "");
-  List<TextEditingController> controllers =
-      List.generate(8, (_) => TextEditingController());
   List<bool> isAnswerCorrect = List.filled(8, false);
 
   void checkAnswers() {
-    for (int i = 0; i < ExamData.correctAnswersWordFormation.length; i++) {
-      if (userAnswers[i].toUpperCase() ==
-          ExamData.correctAnswersWordFormation[i]) {
+    for (int i = 0; i < ExamData.readingPartOneAnswers.length; i++) {
+      if (userAnswers[i] ==
+          ExamData.readingPartOneAnswers[i]['correctAnswer']) {
         isAnswerCorrect[i] = true;
       } else {
         isAnswerCorrect[i] = false;
@@ -36,9 +34,7 @@ class _WordFormationExamPageState extends State<WordFormationExamPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              for (int i = 0;
-                  i < ExamData.correctAnswersWordFormation.length;
-                  i++)
+              for (int i = 0; i < ExamData.readingPartOneAnswers.length; i++)
                 Row(
                   children: <Widget>[
                     Icon(
@@ -64,7 +60,10 @@ class _WordFormationExamPageState extends State<WordFormationExamPage> {
               onPressed: () {
                 Navigator.of(context).pop();
                 showCorrectAnswersDialog(
-                    context, ExamData.correctAnswersWordFormation);
+                    context,
+                    ExamData.readingPartOneAnswers
+                        .map((e) => e['correctAnswer'].toString())
+                        .toList());
               },
             ),
             TextButton(
@@ -84,7 +83,7 @@ class _WordFormationExamPageState extends State<WordFormationExamPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: const Text("Word Formation Exercise"),
+        title: const Text("Reading Part 1"),
         backgroundColor: Colors.transparent,
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
         elevation: 0,
@@ -95,30 +94,29 @@ class _WordFormationExamPageState extends State<WordFormationExamPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             const Text(
-              ExamData.questionWordFormation,
+              ExamData.readingPartOneQuestion,
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 16),
             const Text(
-              ExamData.questionTextWordFormation,
+              ExamData.readingPartOneText,
               style: TextStyle(fontSize: 16.0),
             ),
             const SizedBox(height: 16),
-            for (int i = 0; i < 8; i++)
-              CustomAnswerField(
-                controller: controllers[i],
-                index: i,
-                isCorrect: isAnswerCorrect[i],
-                onChanged: (value) {
+            for (int i = 0; i < ExamData.readingPartOneAnswers.length; i++)
+              CustomMultipleChoice(
+                question: ExamData.readingPartOneAnswers[i]['question'],
+                options: List<String>.from(
+                    ExamData.readingPartOneAnswers[i]['options']),
+                onSelected: (answer) {
                   setState(() {
-                    userAnswers[i] = value.toUpperCase();
+                    userAnswers[i] = answer.split(' ')[0];
                   });
                 },
               ),
-            const SizedBox(height: 20),
-            CustomButton(
-              onTap: checkAnswers,
-              text: 'Check Answers',
+            ElevatedButton(
+              onPressed: checkAnswers,
+              child: const Text('Check Answers'),
             ),
           ],
         ),
@@ -126,11 +124,11 @@ class _WordFormationExamPageState extends State<WordFormationExamPage> {
     );
   }
 
+  // Clean up the userAnswers
   @override
   void dispose() {
-    for (var controller in controllers) {
-      controller.dispose();
-    }
+    userAnswers = List.filled(8, "");
+    isAnswerCorrect = List.filled(8, false);
     super.dispose();
   }
 }
