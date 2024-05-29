@@ -1,6 +1,9 @@
 import 'package:be_english/auth/auth.dart';
 import 'package:be_english/firebase_options.dart';
 import 'package:be_english/pages/exams/listening_part1_page.dart';
+import 'package:be_english/pages/exams/listening_part2_page.dart';
+import 'package:be_english/pages/exams/listening_part3_page.dart';
+import 'package:be_english/pages/exams/listening_part4_page.dart';
 import 'package:be_english/pages/exams/reading_part1_multiple_choice_cloze.dart';
 import 'package:be_english/pages/exams/reading_part5_multiple_choice.dart';
 import 'package:be_english/pages/exams/reading_part6_open_cloze.dart';
@@ -19,12 +22,19 @@ import 'package:be_english/theme/dark_mode.dart';
 import 'package:be_english/theme/light_mode.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   NotificationService.initialize();
   NotificationService.scheduleDailyNotification();
+
+  // Block landscape mode
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 
   runApp(const MainApp());
 }
@@ -56,7 +66,12 @@ class MainApp extends StatelessWidget {
         '/reading_part5_multiple_choice': (context) => const ReadingPart5Page(),
         '/reading_part6_open_cloze': (context) => const ReadingPart6Page(),
         '/reading_part7_multiple_choice': (context) => const ReadingPart7Page(),
-        '/listening_part1' : (context) => const ListeningPart1Page(),
+        '/listening_part1': (context) => const ListeningPart1Page(),
+        '/listening_part2_open_cloze': (context) => const ListeningPart2Page(),
+        '/listening_part3_multiple_choice': (context) =>
+            const ListeningPart3Page(),
+        '/listening_part4_key_word_transformation': (context) =>
+            const ListeningPart4Page(),
       },
     );
   }

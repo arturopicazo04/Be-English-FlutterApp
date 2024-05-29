@@ -35,6 +35,9 @@ flutter:
     - assets/audio/extract1.mp3
     - assets/audio/extract2.mp3
     - assets/audio/extract3.mp3
+    - assets/audio/part2.mp3
+    - assets/audio/part3.mp3
+    - assets/audio/part4.mp3
 
 flutter_icons:
   android: true

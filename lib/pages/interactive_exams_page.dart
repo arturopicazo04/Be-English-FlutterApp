@@ -124,7 +124,7 @@ class InteractiveExamsPage extends StatelessWidget {
                             text: "Part 3: Multiple Choice",
                             onTap: () {
                               Navigator.pushNamed(
-                                  context, '/listening_part3_word_formation');
+                                  context, '/listening_part3_multiple_choice');
                             },
                           ),
                           const SizedBox(height: 10),

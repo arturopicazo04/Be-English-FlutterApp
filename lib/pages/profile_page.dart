@@ -120,7 +120,7 @@ class ProfilePage extends StatelessWidget {
                         fontWeight: FontWeight.normal,
                       ),
                     ),
-                    
+
                     const Expanded(
                       child: SizedBox(),
                     ),

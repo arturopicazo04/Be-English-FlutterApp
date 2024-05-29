@@ -419,4 +419,129 @@ I have reflected on such issues at greater length in my previous work, so while 
       "C. To express a reservation about her interpretation"
     ]
   ];
+
+  static const String listeningPar2Question =
+      """You will hear a student called Josh talking about his research project. For questions 1 – 8, complete the sentences with a word or short phrase.
+      TRIP TO SOUTH AFRICA
+      """;
+  static const List<String> listeningPart2Questions = [
+    "As well as his research project, Josh planned to write a (1) ………………………………… for a website while he was in Africa.",
+    "Josh’s group planned to check out a particular region after a (2) ………………………………… that had occurred there.",
+    "Josh was surprised to see (3) ………………………………… being grown in the first area they visited.",
+    "Josh describes the vehicle they travelled in as a (4) ………………………………… when they went in search of specimens.",
+    "Josh uses the word (5) ………………………………… to give us an idea of the shape of the leaves he found.",
+    "Josh was particularly impressed by one type of flower which was (6)................................................... in colour.",
+    "Josh uses the word (7) ………………………………… to convey his feelings about an area of vegetation he studied.",
+    "Josh really appreciated the view he got from the (8) ………………………………… of his accommodation."
+  ];
+
+  static const List<String> listeningPart2CorrectAnswers = [
+    "REPORT",
+    "FIRE",
+    "(RED) TEA",
+    "SAFARI TRUCK",
+    "NEEDLE(S)",
+    "(DEEP) ORANGE",
+    "PARADISE",
+    "ROOF"
+  ];
+
+  static const List<String> listeningPart3Questions = [
+    "What does Jenny say about the story which made her name?",
+    "What does Jenny suggest about the editor she worked for on her first national daily newspaper?",
+    "When Jenny got her own daily column on the newspaper, she felt",
+    "Peter thinks he got a job on Carp Magazine thanks to",
+    "Peter and Jenny agree that courses in journalism",
+    "When asked about their novels, Peter and Jenny reveal",
+  ];
+
+  static const List<List<String>> listeningPart3Options = [
+    [
+      "A. She’d been on the lookout for just such a lucky break.",
+      "B. She resented colleagues trying to take the credit for it.",
+      "C. She wasn’t actually responsible for the finished article.",
+      "D. She asked for a more prestigious job on the strength of it.",
+    ],
+    [
+      "A. He respected her for standing up to him.",
+      "B. He tended to blame her for things unfairly.",
+      "C. He wasn’t as unreasonable as everyone says.",
+      "D. He taught her the value of constructive criticism.",
+    ],
+    [
+      "A. satisfied that the good work she’d done elsewhere had been recognised.",
+      "B. relieved that it was only likely to be a short-term appointment.",
+      "C. determined to prove exactly what she was capable of.",
+      "D. unsure of her ability to make a success of it.",
+    ],
+    [
+      "A. his academic achievements at college.",
+      "B. his practical knowledge of everyday journalism.",
+      "C. his familiarity with the interests of its main target audience.",
+      "D. his understanding of how best to present himself at interview.",
+    ],
+    [
+      "A. need to be supplemented by first-hand experience.",
+      "B. are attractive because they lead to paid employment.",
+      "C. are of little value compared to working on a student newspaper.",
+      "D. provide an opportunity for writers to address contentious issues.",
+    ],
+    [
+      "A. an ambition to gain recognition for their craft.",
+      "B. a desire to develop careers outside journalism.",
+      "C. a need to prove how versatile they are as writers.",
+      "D. a wish to keep their journalism fresh and appealing.",
+    ],
+  ];
+
+  static const List<String> listeningPart3CorrectAnswers = [
+    "C",
+    "B",
+    "C",
+    "B",
+    "A",
+    "D"
+  ];
+  static const List<String> listeningPart4QuestionsTask1 = [
+    "Reason for changing job"
+  ];
+
+  static const List<String> listeningPart4QuestionsTask2 = [
+    "Feeling about new job"
+  ];
+
+  static const List<String> listeningPart4Options = [
+    "A. unfriendly colleagues",
+    "B. poor holiday entitlement",
+    "C. lacking a sense of purpose",
+    "D. needing more of a challenge",
+    "E. the workload",
+    "F. disagreements with superiors",
+    "G. no prospect of advancement",
+    "H. the physical environment",
+    "A. encouraged by early results",
+    "B. hopeful about future success",
+    "C. delighted by a change in lifestyle",
+    "D. relieved the initial uncertainty is over",
+    "E. glad to be helping other people",
+    "F. grateful for an increase in salary",
+    "G. happy to feel in control",
+    "H. satisfied with the training received"
+  ];
+
+  static const List<String> listeningPart4CorrectAnswersTask1 = [
+    "C",
+    "D",
+    "A",
+    "G",
+    "E"
+  ];
+
+  static const List<String> listeningPart4CorrectAnswersTask2 = [
+    "D",
+    "C",
+    "E",
+    "B",
+    "G"
+  ];
 }

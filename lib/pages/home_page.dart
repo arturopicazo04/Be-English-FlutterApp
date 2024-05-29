@@ -27,39 +27,41 @@ class HomePage extends StatelessWidget {
       ),
       drawer: CustomDrawer(),
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(25.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CustomButton(
-                text: "Phrasal Verbs Quiz",
-                onTap: () {
-                  startQuiz(context, 'verbs');
-                },
-              ),
-              const SizedBox(height: 20),
-              CustomButton(
-                text: "Vocabulary Quiz",
-                onTap: () {
-                  startQuiz(context, 'vocabulary');
-                },
-              ),
-              const SizedBox(height: 20),
-              CustomButton(
-                text: "C1 Exams Guide",
-                onTap: () {
-                  Navigator.pushNamed(context, '/guide_page');
-                },
-              ),
-              const SizedBox(height: 20),
-              CustomButton(
-                text: "C1 Interactive Exams",
-                onTap: () {
-                  Navigator.pushNamed(context, '/interactive_exams_page');
-                },
-              ),
-            ],
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(25.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomButton(
+                  text: "Phrasal Verbs Quiz",
+                  onTap: () {
+                    startQuiz(context, 'verbs');
+                  },
+                ),
+                const SizedBox(height: 20),
+                CustomButton(
+                  text: "Vocabulary Quiz",
+                  onTap: () {
+                    startQuiz(context, 'vocabulary');
+                  },
+                ),
+                const SizedBox(height: 20),
+                CustomButton(
+                  text: "C1 Exams Guide",
+                  onTap: () {
+                    Navigator.pushNamed(context, '/guide_page');
+                  },
+                ),
+                const SizedBox(height: 20),
+                CustomButton(
+                  text: "C1 Interactive Exams",
+                  onTap: () {
+                    Navigator.pushNamed(context, '/interactive_exams_page');
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

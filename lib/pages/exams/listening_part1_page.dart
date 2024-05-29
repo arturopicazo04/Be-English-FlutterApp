@@ -1,6 +1,6 @@
+import 'package:be_english/components/custom_audio_player.dart';
 import 'package:be_english/data/exam_data.dart';
 import 'package:flutter/material.dart';
-import 'package:just_audio/just_audio.dart';
 
 class ListeningPart1Page extends StatefulWidget {
   const ListeningPart1Page({super.key});
@@ -10,7 +10,6 @@ class ListeningPart1Page extends StatefulWidget {
 }
 
 class _ListeningPart1PageState extends State<ListeningPart1Page> {
-  final AudioPlayer _player = AudioPlayer();
   int _currentAudioIndex = 0;
   int _currentQuestionIndex = 0;
   final List<String?> _userAnswers = List.filled(6, null);
@@ -24,17 +23,6 @@ class _ListeningPart1PageState extends State<ListeningPart1Page> {
     'assets/audio/extract2.mp3',
     'assets/audio/extract3.mp3',
   ];
-
-  @override
-  void dispose() {
-    _player.dispose();
-    super.dispose();
-  }
-
-  Future<void> _playAudio(String assetPath) async {
-    await _player.setAsset(assetPath);
-    _player.play();
-  }
 
   void _checkAnswers() {
     List<bool> isAnswerCorrect = List.filled(_userAnswers.length, false);
@@ -142,21 +130,7 @@ class _ListeningPart1PageState extends State<ListeningPart1Page> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ElevatedButton(
-                  onPressed: () => _playAudio(_audioPaths[_currentAudioIndex]),
-                  child: Text('Play Extract ${_currentAudioIndex + 1}'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    _player.pause();
-                  },
-                  child: const Icon(Icons.pause),
-                ),
-              ],
-            ),
+            AudioPlayerWidget(assetPath: _audioPaths[_currentAudioIndex]),
             const SizedBox(height: 16),
             Text(
               _questions[_currentAudioIndex * 2 + _currentQuestionIndex],
