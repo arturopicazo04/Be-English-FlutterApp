@@ -81,6 +81,16 @@ class _RankingPageState extends State<RankingPage> {
                 );
               },
             ),
+      bottomNavigationBar: Container(
+        color: Theme.of(context).colorScheme.secondary,
+        padding: const EdgeInsets.all(16.0),
+        child: Text(
+          'The score will be given by the quizzes exercises',
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.background,
+          ),
+        ),
+      ),
     );
   }
 }

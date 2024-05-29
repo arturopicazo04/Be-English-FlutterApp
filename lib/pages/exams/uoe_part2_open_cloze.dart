@@ -80,7 +80,7 @@ class _OpenClozeExamPageState extends State<OpenClozeExamPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: const Text("Open Cloze Exam"),
+        title: const Text("Use of English Part 2"),
         backgroundColor: Colors.transparent,
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
         elevation: 0,

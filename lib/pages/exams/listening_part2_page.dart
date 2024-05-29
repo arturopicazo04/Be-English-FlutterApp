@@ -20,8 +20,12 @@ class _ListeningPart2PageState extends State<ListeningPart2Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: const Text("Listening Part 2"),
+        backgroundColor: Colors.transparent,
+        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
+        elevation: 0,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -33,11 +37,7 @@ class _ListeningPart2PageState extends State<ListeningPart2Page> {
             const Text(
               ExamData.listeningPar2Question,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 16),
-            const Text(
-              "TRIP TO SOUTH AFRICA",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.justify,
             ),
             const SizedBox(height: 16),
             Text(

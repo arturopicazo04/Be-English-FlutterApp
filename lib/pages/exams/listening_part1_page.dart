@@ -122,8 +122,12 @@ class _ListeningPart1PageState extends State<ListeningPart1Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: const Text("Listening Part 1"),
+        backgroundColor: Colors.transparent,
+        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
+        elevation: 0,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

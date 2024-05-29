@@ -84,7 +84,7 @@ class _WordFormationExamPageState extends State<WordFormationExamPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: const Text("Word Formation Exercise"),
+        title: const Text("Use of English Part 3"),
         backgroundColor: Colors.transparent,
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
         elevation: 0,

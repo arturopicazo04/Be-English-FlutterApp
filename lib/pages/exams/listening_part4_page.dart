@@ -17,11 +17,16 @@ class _ListeningPart4PageState extends State<ListeningPart4Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: const Text("Listening Part 4"),
+        backgroundColor: Colors.transparent,
+        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
+        elevation: 0,
       ),
       body: Container(
-        constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
+        constraints:
+            BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -88,7 +93,8 @@ class _ListeningPart4PageState extends State<ListeningPart4Page> {
           style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
-        ..._buildOptions(_currentSpeakerIndex, ExamData.listeningPart4Options.sublist(0, 8), _userAnswersTask1),
+        ..._buildOptions(_currentSpeakerIndex,
+            ExamData.listeningPart4Options.sublist(0, 8), _userAnswersTask1),
       ],
     );
   }
@@ -102,16 +108,18 @@ class _ListeningPart4PageState extends State<ListeningPart4Page> {
           style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
-        ..._buildOptions(_currentSpeakerIndex, ExamData.listeningPart4Options.sublist(8, 16), _userAnswersTask2),
+        ..._buildOptions(_currentSpeakerIndex,
+            ExamData.listeningPart4Options.sublist(8, 16), _userAnswersTask2),
       ],
     );
   }
 
-  List<Widget> _buildOptions(int speakerIndex, List<String> optionsList, List<String?> userAnswers) {
+  List<Widget> _buildOptions(
+      int speakerIndex, List<String> optionsList, List<String?> userAnswers) {
     return optionsList.map((option) {
       return RadioListTile<String>(
         title: Text(option),
-        value: option.split(' ')[0], 
+        value: option.split(' ')[0],
         groupValue: userAnswers[speakerIndex],
         onChanged: (value) {
           setState(() {
