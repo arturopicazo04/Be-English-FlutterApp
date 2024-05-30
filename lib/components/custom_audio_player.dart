@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 
@@ -15,6 +17,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
   Duration _audioDuration = Duration.zero;
   Duration _currentPosition = Duration.zero;
   String? _currentAssetPath;
+  StreamSubscription<Duration>? _positionSubscription;
 
   @override
   void initState() {
@@ -30,7 +33,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
       setState(() {
         _audioDuration = _player.duration!;
       });
-      _player.positionStream.listen((position) {
+      _positionSubscription = _player.positionStream.listen((position) {
         setState(() {
           _currentPosition = position;
         });
@@ -63,6 +66,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
 
   @override
   void dispose() {
+    _positionSubscription?.cancel();
     _player.dispose();
     super.dispose();
   }
