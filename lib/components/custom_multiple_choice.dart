@@ -35,7 +35,10 @@ class _CustomMultipleChoiceState extends State<CustomMultipleChoice> {
         children: <Widget>[
           Text(
             widget.question,
-            style: const TextStyle(fontSize: 16.0),
+            style: const TextStyle(
+              fontSize: 16.0,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           const SizedBox(height: 8),
           for (var option in widget.options)

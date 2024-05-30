@@ -100,7 +100,7 @@ Max received a................................................at night without a
 
   //Reading:
   static const String readingPartOneQuestion =
-      "For questions 1 – 8, read the text below and decide which answer (A, B, C or D) best fits each gap. There is an example at the beginning (0). Mark your answers on the separate answer sheet.";
+      "For questions 1 – 8, read the text below and decide which answer (A, B, C or D) best fits each gap.";
 
   static const String readingPartOneText = """
 Studying black bears
@@ -154,7 +154,7 @@ However, Robertson is no sentimentalist. After devoting years of his life to the
     }
   ];
   static const String readingPartFiveQuestion =
-      "You are going to read the introduction to a book about the history of colour. For questions 1 – 6, choose the answer (A, B, C or D) which you think fits best according to the text. Mark your answers on the separate answer sheet.";
+      "You are going to read the introduction to a book about the history of colour. For questions 1 – 6, choose the answer (A, B, C or D) which you think fits best according to the text.";
 
   static const String readingPartFiveText = """
 Introduction to a book about the history of colour
@@ -172,7 +172,7 @@ I have reflected on such issues at greater length in my previous work, so while 
   static const List<Map<String, dynamic>> readingPartFiveAnswers = [
     {
       'question':
-          "1 What problem regarding colour does the writer explain in the first paragraph?",
+          "What problem regarding colour does the writer explain in the first paragraph?",
       'options': [
         "A Our view of colour is strongly affected by changing fashion.",
         "B Analysis is complicated by the bewildering number of natural colours.",
@@ -183,7 +183,7 @@ I have reflected on such issues at greater length in my previous work, so while 
     },
     {
       'question':
-          "2 What is the first reason the writer gives for the lack of academic work on the history of colour?",
+          "What is the first reason the writer gives for the lack of academic work on the history of colour?",
       'options': [
         "A There are problems of reliability associated with the artefacts available.",
         "B Historians have seen colour as being outside their field of expertise.",
@@ -194,7 +194,7 @@ I have reflected on such issues at greater length in my previous work, so while 
     },
     {
       'question':
-          "3 The writer suggests that the priority when conducting historical research on colour is to",
+          "The writer suggests that the priority when conducting historical research on colour is to",
       'options': [
         "A ignore the interpretations of other modern day historians.",
         "B focus one’s interest as far back as the prehistoric era.",
@@ -205,7 +205,7 @@ I have reflected on such issues at greater length in my previous work, so while 
     },
     {
       'question':
-          "4 In the fourth paragraph, the writer says that the historian writing about colour should be careful",
+          "In the fourth paragraph, the writer says that the historian writing about colour should be careful",
       'options': [
         "A not to analyse in an old-fashioned way.",
         "B when making basic distinctions between key ideas.",
@@ -216,7 +216,7 @@ I have reflected on such issues at greater length in my previous work, so while 
     },
     {
       'question':
-          "5 In the fifth paragraph, the writer says there needs to be further research done on",
+          "In the fifth paragraph, the writer says there needs to be further research done on",
       'options': [
         "A the history of colour in relation to objects in the world around us.",
         "B the concerns he has raised in an earlier publication.",
@@ -227,7 +227,7 @@ I have reflected on such issues at greater length in my previous work, so while 
     },
     {
       'question':
-          "6 An idea recurring in the text is that people who have studied colour have",
+          "An idea recurring in the text is that people who have studied colour have",
       'options': [
         "A failed to keep up with scientific developments.",
         "B not understood its global significance.",
@@ -302,7 +302,6 @@ I have reflected on such issues at greater length in my previous work, so while 
   // Part 7
   static const String readingPartSevenQuestion = """
     You are going to read an extract from a magazine article. Six paragraphs have been removed from the extract. Choose from the paragraphs A – G the one which fits each gap (1 – 6). There is one extra paragraph which you do not need to use.
-    Mark your answers on the separate answer sheet.
     Scottish Wildcat
   """;
 
@@ -502,34 +501,45 @@ I have reflected on such issues at greater length in my previous work, so while 
     "A",
     "D"
   ];
-  static const List<String> listeningPart4QuestionsTask1 = [
-    "Reason for changing job"
+  static const List<String> listeningPart4QuestionsTaskOne = [
+    "Speaker 1 - Task One",
+    "Speaker 2 - Task One",
+    "Speaker 3 - Task One",
+    "Speaker 4 - Task One",
+    "Speaker 5 - Task One",
   ];
 
-  static const List<String> listeningPart4QuestionsTask2 = [
-    "Feeling about new job"
+  static const List<String> listeningPart4QuestionsTaskTwo = [
+    "Speaker 1 - Task Two",
+    "Speaker 2 - Task Two",
+    "Speaker 3 - Task Two",
+    "Speaker 4 - Task Two",
+    "Speaker 5 - Task Two",
   ];
 
-  static const List<String> listeningPart4Options = [
-    "A. unfriendly colleagues",
-    "B. poor holiday entitlement",
-    "C. lacking a sense of purpose",
-    "D. needing more of a challenge",
-    "E. the workload",
-    "F. disagreements with superiors",
-    "G. no prospect of advancement",
-    "H. the physical environment",
-    "A. encouraged by early results",
-    "B. hopeful about future success",
-    "C. delighted by a change in lifestyle",
-    "D. relieved the initial uncertainty is over",
-    "E. glad to be helping other people",
-    "F. grateful for an increase in salary",
-    "G. happy to feel in control",
-    "H. satisfied with the training received"
+  static const List<String> listeningPart4OptionsTaskOne = [
+    "A unfriendly colleagues",
+    "B poor holiday entitlement",
+    "C lacking a sense of purpose",
+    "D needing more of a challenge",
+    "E the workload",
+    "F disagreements with superiors",
+    "G no prospect of advancement",
+    "H the physical environment"
   ];
 
-  static const List<String> listeningPart4CorrectAnswersTask1 = [
+  static const List<String> listeningPart4OptionsTaskTwo = [
+    "A encouraged by early results",
+    "B hopeful about future success",
+    "C delighted by a change in lifestyle",
+    "D relieved the initial uncertainty is over",
+    "E glad to be helping other people",
+    "F grateful for an increase in salary",
+    "G happy to feel in control",
+    "H satisfied with the training received"
+  ];
+
+  static const List<String> listeningPart4CorrectAnswersTaskOne = [
     "C",
     "D",
     "A",
@@ -537,7 +547,7 @@ I have reflected on such issues at greater length in my previous work, so while 
     "E"
   ];
 
-  static const List<String> listeningPart4CorrectAnswersTask2 = [
+  static const List<String> listeningPart4CorrectAnswersTaskTwo = [
     "D",
     "C",
     "E",

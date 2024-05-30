@@ -96,11 +96,15 @@ class _ReadingPart1PageState extends State<ReadingPart1Page> {
             const Text(
               ExamData.readingPartOneQuestion,
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.justify,
             ),
             const SizedBox(height: 16),
             const Text(
               ExamData.readingPartOneText,
-              style: TextStyle(fontSize: 16.0),
+              style: TextStyle(
+                fontSize: 16.0,
+              ),
+              textAlign: TextAlign.justify,
             ),
             const SizedBox(height: 16),
             for (int i = 0; i < ExamData.readingPartOneAnswers.length; i++)

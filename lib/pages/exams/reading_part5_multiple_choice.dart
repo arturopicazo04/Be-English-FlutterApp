@@ -103,25 +103,23 @@ class _ReadingPart5PageState extends State<ReadingPart5Page> {
             const Text(
               ExamData.readingPartFiveQuestion,
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.justify,
             ),
             const SizedBox(height: 16),
             const Text(
               ExamData.readingPartFiveText,
               style: TextStyle(fontSize: 16.0),
+              textAlign: TextAlign.justify,
             ),
             const SizedBox(height: 16),
             for (int i = 0; i < ExamData.readingPartFiveAnswers.length; i++)
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Question ${i + 31}: ${ExamData.readingPartFiveAnswers[i]['question']}',
-                    style: const TextStyle(fontSize: 16.0),
-                  ),
                   const SizedBox(height: 8),
                   CustomMultipleChoice(
                     question:
-                        'Question ${i + 31}: ${ExamData.readingPartFiveAnswers[i]['question']}',
+                        'Question ${i + 1}: ${ExamData.readingPartFiveAnswers[i]['question']}',
                     options: List<String>.from(
                         ExamData.readingPartFiveAnswers[i]['options']),
                     onSelected: (answer) {
