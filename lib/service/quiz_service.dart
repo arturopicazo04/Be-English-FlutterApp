@@ -4,10 +4,8 @@ class QuizService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<List<Map<String, dynamic>>> getRandomQuestions(String collectionName) async {
-    // Get all documents from the specified collection
     QuerySnapshot querySnapshot = await _firestore.collection(collectionName).get();
 
-    // Convert the documents to a list of maps
     List<Map<String, dynamic>> allQuestions = querySnapshot.docs.map((doc) {
       return {
         'id': doc.id,
@@ -15,7 +13,6 @@ class QuizService {
       };
     }).toList();
 
-    // Shuffle the list to randomize it
     allQuestions.shuffle();
 
     return allQuestions.take(5).toList();

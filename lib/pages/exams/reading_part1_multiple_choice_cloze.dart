@@ -128,7 +128,6 @@ class _ReadingPart1PageState extends State<ReadingPart1Page> {
     );
   }
 
-  // Clean up the userAnswers
   @override
   void dispose() {
     userAnswers = List.filled(8, "");
