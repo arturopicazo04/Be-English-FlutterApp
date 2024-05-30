@@ -1,4 +1,3 @@
-import 'package:be_english/components/custom_button.dart';
 import 'package:be_english/components/custom_drawer.dart';
 import 'package:flutter/material.dart';
 
@@ -19,131 +18,139 @@ class InteractiveExamsPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(16.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Text(
-                  "Reading and Use Of English",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 60, vertical: 20),
-                      child: Column(
-                        children: [
-                          CustomButton(
-                            text: "Part 1: Multiple Choice",
-                            onTap: () {
-                              Navigator.pushNamed(context,
-                                  '/reading_part1_multiple_choice_cloze');
-                            },
-                          ),
-                          const SizedBox(height: 10),
-                          CustomButton(
-                            text: "Part 2: Open Cloze",
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, '/uoe_part2_open_cloze');
-                            },
-                          ),
-                          const SizedBox(height: 10),
-                          CustomButton(
-                            text: "Part 3: Word Formation",
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, '/uoe_part3_word_formation');
-                            },
-                          ),
-                          const SizedBox(height: 10),
-                          CustomButton(
-                            text: "Part 4: Key Word Transformation",
-                            onTap: () {
-                              Navigator.pushNamed(context,
-                                  '/uoe_part4_key_word_transformation');
-                            },
-                          ),
-                          const SizedBox(height: 10),
-                          CustomButton(
-                            text: "Part 5: Multiple Choice",
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, '/reading_part5_multiple_choice');
-                            },
-                          ),
-                          const SizedBox(height: 10),
-                          CustomButton(
-                            text: "Part 6: Gapped Text",
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, '/reading_part6_open_cloze');
-                            },
-                          ),
-                          const SizedBox(height: 10),
-                          CustomButton(
-                            text: "Part 7: Multiple Matching",
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, '/reading_part7_multiple_choice');
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                const Text(
-                  "Listening",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 60, vertical: 10),
-                      child: Column(
-                        children: [
-                          CustomButton(
-                            text: "Part 1: Multiple Choice",
-                            onTap: () {
-                              Navigator.pushNamed(context, '/listening_part1');
-                            },
-                          ),
-                          const SizedBox(height: 10),
-                          CustomButton(
-                            text: "Part 2: Sentence Completion",
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, '/listening_part2_open_cloze');
-                            },
-                          ),
-                          const SizedBox(height: 10),
-                          CustomButton(
-                            text: "Part 3: Multiple Choice",
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, '/listening_part3_multiple_choice');
-                            },
-                          ),
-                          const SizedBox(height: 10),
-                          CustomButton(
-                            text: "Part 4: Multiple Choice",
-                            onTap: () {
-                              Navigator.pushNamed(context,
-                                  '/listening_part4_key_word_transformation');
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                _buildSectionTitle(context, "Reading and Use Of English"),
+                _buildReadingButtons(context),
+                const SizedBox(height: 30),
+                _buildSectionTitle(context, "Listening"),
+                _buildListeningButtons(context),
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildSectionTitle(BuildContext context, String title) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16.0),
+      child: Text(
+        title,
+        style: const TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildReadingButtons(BuildContext context) {
+    return Column(
+      children: [
+        _buildExamCard(
+          context,
+          title: "Part 1: Multiple Choice",
+          icon: Icons.format_list_numbered,
+          route: '/reading_part1_multiple_choice_cloze',
+        ),
+        _buildExamCard(
+          context,
+          title: "Part 2: Open Cloze",
+          icon: Icons.edit,
+          route: '/uoe_part2_open_cloze',
+        ),
+        _buildExamCard(
+          context,
+          title: "Part 3: Word Formation",
+          icon: Icons.text_fields,
+          route: '/uoe_part3_word_formation',
+        ),
+        _buildExamCard(
+          context,
+          title: "Part 4: Key Word Transformation",
+          icon: Icons.transform,
+          route: '/uoe_part4_key_word_transformation',
+        ),
+        _buildExamCard(
+          context,
+          title: "Part 5: Multiple Choice",
+          icon: Icons.check_circle_outline,
+          route: '/reading_part5_multiple_choice',
+        ),
+        _buildExamCard(
+          context,
+          title: "Part 6: Gapped Text",
+          icon: Icons.short_text,
+          route: '/reading_part6_open_cloze',
+        ),
+        _buildExamCard(
+          context,
+          title: "Part 7: Multiple Matching",
+          icon: Icons.swap_horiz,
+          route: '/reading_part7_multiple_choice',
+        ),
+      ],
+    );
+  }
+
+  Widget _buildListeningButtons(BuildContext context) {
+    return Column(
+      children: [
+        _buildExamCard(
+          context,
+          title: "Part 1: Multiple Choice",
+          icon: Icons.hearing,
+          route: '/listening_part1',
+        ),
+        _buildExamCard(
+          context,
+          title: "Part 2: Sentence Completion",
+          icon: Icons.note_add,
+          route: '/listening_part2_open_cloze',
+        ),
+        _buildExamCard(
+          context,
+          title: "Part 3: Multiple Choice",
+          icon: Icons.hearing,
+          route: '/listening_part3_multiple_choice',
+        ),
+        _buildExamCard(
+          context,
+          title: "Part 4: Multiple Choice",
+          icon: Icons.hearing,
+          route: '/listening_part4_key_word_transformation',
+        ),
+      ],
+    );
+  }
+
+  Widget _buildExamCard(
+    BuildContext context, {
+    required String title,
+    required IconData icon,
+    required String route,
+  }) {
+    return Card(
+      elevation: 4,
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      child: ListTile(
+        leading: Icon(icon, color: Theme.of(context).colorScheme.primary),
+        title: Text(
+          title,
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        trailing: const Icon(Icons.arrow_forward_ios),
+        onTap: () {
+          Navigator.pushNamed(context, route);
+        },
       ),
     );
   }
