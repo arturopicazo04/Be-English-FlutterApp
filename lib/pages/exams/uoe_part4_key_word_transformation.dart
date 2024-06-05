@@ -4,7 +4,7 @@ import 'package:be_english/helper/helper_function.dart';
 import 'package:flutter/material.dart';
 
 class KeyWordTransformationExamPage extends StatefulWidget {
-  const KeyWordTransformationExamPage({Key? key}) : super(key: key);
+  const KeyWordTransformationExamPage({super.key});
 
   @override
   _KeyWordTransformationExamPageState createState() =>

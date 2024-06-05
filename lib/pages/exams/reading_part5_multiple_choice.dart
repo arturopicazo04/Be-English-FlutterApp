@@ -4,7 +4,7 @@ import 'package:be_english/helper/helper_function.dart';
 import 'package:flutter/material.dart';
 
 class ReadingPart5Page extends StatefulWidget {
-  const ReadingPart5Page({Key? key}) : super(key: key);
+  const ReadingPart5Page({super.key});
 
   @override
   _ReadingPart5PageState createState() => _ReadingPart5PageState();

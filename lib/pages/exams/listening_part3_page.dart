@@ -3,7 +3,7 @@ import 'package:be_english/components/custom_audio_player.dart';
 import 'package:be_english/data/exam_data.dart';
 
 class ListeningPart3Page extends StatefulWidget {
-  const ListeningPart3Page({Key? key}) : super(key: key);
+  const ListeningPart3Page({super.key});
 
   @override
   _ListeningPart3PageState createState() => _ListeningPart3PageState();

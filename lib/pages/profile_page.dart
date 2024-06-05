@@ -20,6 +20,7 @@ class DatabaseService {
   }
 }
 
+// ignore: must_be_immutable
 class ProfilePage extends StatelessWidget {
   ProfilePage({super.key});
   CloudStorageService cloudStorageService = CloudStorageService();

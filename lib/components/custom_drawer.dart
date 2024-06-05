@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CustomDrawer extends StatelessWidget {
   CustomDrawer({super.key});
   FirebaseAuth auth = FirebaseAuth.instance;
